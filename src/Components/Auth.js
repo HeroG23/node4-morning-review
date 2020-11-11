@@ -5,7 +5,7 @@ class Auth extends Component{
     constructor(){
         super()
         this.state = {
-            username: '',
+            email: '',
             password: ''
         }
     }
@@ -18,11 +18,11 @@ class Auth extends Component{
     }
 
     submitAuth = () => {
-        const {username, password} = this.state
-        axios.post(`/auth/${this.props.match.params.authType}`, {username, password})
+        const {email, password} = this.state
+        axios.post(`/auth/${this.props.match.params.authType}`, {email, password})
             .then(res => {
                 this.setState({
-                    username: '',
+                    email: '',
                     password: ''
                 })
                 this.props.history.push('/home')
@@ -35,14 +35,14 @@ class Auth extends Component{
                 {this.props.match.params.authType === 'login' ? (
                     <div>
                         <h1>Please Login Below</h1>
-                        <input type='text' placeholder='Email' maxLength='200' name='username' value={this.state.username} onChange={this.handleChange}/>
+                        <input type='text' placeholder='Email' maxLength='200' name='email' value={this.state.email} onChange={this.handleChange}/>
                         <input type='password' placeholder='Password' maxLength='20' name='password' value={this.state.password} onChange={this.handleChange}/>
                         <button onClick={this.submitAuth}>Login</button>
                     </div>
                 ): (
                     <div>
                         <h1>Please Register Below</h1>
-                        <input type='text' maxLength='200' name='username' value={this.state.username} onChange={this.handleChange}/>
+                        <input type='text' maxLength='200' name='email' value={this.state.email} onChange={this.handleChange}/>
                         <input type='password' maxLength='20' name='password' value={this.state.password} onChange={this.handleChange}/>
                         <button onClick={this.submitAuth}>Register</button>
                     </div>
